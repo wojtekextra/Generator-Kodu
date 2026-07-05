@@ -1,0 +1,7 @@
+{
+  "class_name": "UserData",
+  "fields": [
+    {"name": "id", "type": "int"},
+    {"name": "username", "type": "string"}
+  ]
+}

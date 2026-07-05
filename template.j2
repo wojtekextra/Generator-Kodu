@@ -1,0 +1,16 @@
+import struct
+
+class {{ class_name }}:
+    def __init__(self, {{ fields | map(attribute='name') | join(', ') }}):
+        {% for field in fields %}
+        self.{{ field.name }} = {{ field.name }}
+        {% endfor %}
+
+    def serialize(self):
+        # Przykład binarnej serializacji (format: i = int, 20s = string)
+        return struct.pack('i20s', self.id, self.username.encode())
+
+    @staticmethod
+    def deserialize(data):
+        unpacked = struct.unpack('i20s', data)
+        return {{ class_name }}(unpacked[0], unpacked[1].decode().strip('\x00'))
